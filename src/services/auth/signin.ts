@@ -1,4 +1,4 @@
-import { ApiContext, User } from 'types'
+import type { ApiContext, User } from 'types'
 import { fetcher } from 'utils'
 
 export type SigninParams = {
@@ -17,7 +17,7 @@ export type SigninParams = {
 /**
  * 認証API（サインイン）
  * @param, context APIコンテキスト
- * @param para,s パラメータ
+ * @param params パラメータ
  * @returns ログインユーザ
  */
 const signin = async (
@@ -36,3 +36,5 @@ const signin = async (
     },
   )
 }
+
+export default signin
