@@ -83,3 +83,32 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return { paths, fallback: true }
 }
+
+export const getStaticProps = async ({ params }: GetStaticPropsContext) => {
+  const context: ApiContext = {
+    apiRootUrl: process.env.API_BASE_URL || 'http://localhost:5000',
+  }
+
+  if (!params) {
+    throw new Error('params is undefined')
+  }
+
+  // ユーザ情報とユーザの所持する商品を取得し、静的ページを作成
+  // 10秒でrevalidateな状態にし、静的ページを更新する
+  const userId = Number(params.id)
+  const [user, products] = await Promise.all([
+    getUser(context, { id: userId }),
+    getAllProducts(context, { userId }),
+  ])
+
+  return {
+    props: {
+      id: userId,
+      user,
+      products: products ?? [],
+    },
+    revalidate: 10,
+  }
+}
+
+export default UserPage
