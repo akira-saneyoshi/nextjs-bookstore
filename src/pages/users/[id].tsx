@@ -1,11 +1,12 @@
 import type {
   GetStaticPaths,
   GetStaticPropsContext,
-  InterGetStaticPropsType,
+  InferGetStaticPropsType,
   NextPage,
 } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import type { ApiContext } from 'types'
 import BreadcrumbItem from 'components/atoms/BreadcrumbItem'
 import Separator from 'components/atoms/Separator'
 import Box from 'components/layout/Box'
@@ -17,7 +18,6 @@ import UserProfileContainer from 'containers/UserProfileContainer'
 import getAllProducts from 'services/products/get-all-products'
 import getAllUsers from 'services/users/get-all-users'
 import getUser from 'services/users/get-user'
-import type { ApiContext } from 'types'
 
 type UserPageProps = InferGetStaticPropsType<typeof getStaticProps>
 
